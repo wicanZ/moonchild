@@ -1,0 +1,184 @@
+{% extends '../main/main.html' %}
+{% block content %}
+	{% if user.is_authenticated %}
+
+
+  <div class="wrapper2  set-center">
+    <h5>Profile Setting</h5>
+    {% if messages %}
+      {% for msg in messages %}
+        <div class="alert alert-info alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{msg.message}}
+              </div>
+      {% endfor %}
+    {% endif %}
+    <hr class="bor-b">
+    <div class="center_postion">
+        <div class="wrapper2  set-center">
+          <h5>Delete Your Account </h5>
+          <hr class="bor-b">
+          <div class="center_postion">
+              <form method="post" action="{% url 'deactivatesetting' %}" class="input-group">
+                {% csrf_token %}
+                <input type="email" name='youremail' class="form-control form-control" placeholder="Enter Your email"
+                  aria-label="Your email" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-sm btn-outline-primary my-0" type="submit">Delete</button>
+                </div>
+              </form>
+          </div>
+        </div>
+
+    </div>
+  </div>
+        <div class="wrapper2  set-center">
+            <h5>{{set}}</h5>
+            <hr class="bor-b">
+            <div class="center_postion">
+                <ul class="themecolors">
+                  <li 
+                  onclick="chooseColor('red');"
+                  class="themecolor"
+                  style="background: red;"
+                  >
+                  </li>
+                  <li 
+                  onclick="chooseColor('blue');"
+                  class="themecolor"
+                  style="background: blue;">
+                  </li>
+                  <li 
+                  class="themecolor"
+                  onclick="chooseColor('green');"
+                  style="background: green;">
+                  </li>
+                  <li 
+                  class="themecolor"
+                  onclick="chooseColor('#ffcc00');"
+                  style="background: #ffcc00;">
+                  </li>
+                  <li 
+                  class="themecolor"
+                  onclick="chooseColor('#cc0099');"
+                  style="background: #cc0099;">
+                  </li>
+                  <li 
+                  class="themecolor"
+                  onclick="chooseColor('#33ccff');"
+                  style="background: #33ccff;">
+                  </li>
+                  <li 
+                  id="randomcolor"
+                  class="themecolor"
+                  onclick="randomColor();"
+                  >
+                  </li>
+                </ul>
+
+                <div class="wrapper2 themecolors">
+                  <input
+                    onchange="setFontSize(this.value)"
+                    id="range_font_size"
+                    class="theme_font_text"
+                    type="range"
+                    min="15"
+                    max="30"
+                    value="15"
+                  />
+                  <input id="speed_input" class="theme_border_color inputline"  value="20" max='30' readonly/>
+                </div>
+
+
+                <div class="wrapper2  set-center">
+                  <h5>Private Chat</h5>
+                  <hr class="bor-b">
+                  <div class="center_postion">
+                      <a class="text-none" href="{% url 'priv' %}">Private chat </a>
+                  </div>
+                </div>
+
+            </div>
+        </div>
+
+        
+        <hr class="bor-b">
+
+        <div class="wrapper2  set-center">
+          <h5>List of blog </h5>
+            <hr class="bor-b">
+            <table class="table table-bordered">
+              <thead>
+
+                <tr class="text-white ">
+                  <th>Blog</th>
+                  <th>Date</th>
+                  <th>email</th>
+                </tr>
+
+                {% for user in users %}
+                  {% if request.user == user.user %}
+                  
+                  </thead>
+                  <tbody class="text-info">
+                  <tr>
+                    <td><a class="text-none" href="{% url 'view-blog' user.id %}">{{ user.header }}</a></td>
+                    <td>{{ user.created }}</td>
+                    <td>{{ user.user }}</td>
+                  </tr>
+                  {% endif %}
+                {% empty %}
+                <div class="text-center">
+                  <h3>
+                    Start Creating Your 0wn Blog!
+                  </h3>
+                </div>
+                {% endfor %}
+              </tbody>
+            </table>
+            
+            {% if users.has_other_pages %}
+              <ul class="pagination ml-4 p-4  ">
+                {% if users.has_previous %}
+                  <li><a class="btn btn-info" href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                  <li class="disabled"><span class="btn-info btn">&laquo;</span></li>
+                {% endif %}
+                {% for i in users.paginator.page_range %}
+                  {% if users.number == i %}
+                    <li class="active"><span class="btn btn-info">{{ i }} <span class="sr-only">(current)</span></span></li>
+                  {% else %}
+                    <li><a class="btn btn-info" href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+                {% endfor %}
+                {% if users.has_next %}
+                  <li><a class="btn btn-info" href="?page={{ users.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                  <li class="disabled"><span class="btn-info btn">&raquo;</span></li>
+                {% endif %}
+              </ul>
+            {% endif %}
+
+
+    
+            {% include '../main/footer.html' %}
+
+    {% else %}
+    <div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+
+    </div>
+
+    {% endif %}
+
+{% endblock content %}

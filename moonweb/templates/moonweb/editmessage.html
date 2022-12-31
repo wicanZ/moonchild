@@ -1,0 +1,32 @@
+{% extends '../main/main.html' %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+    <div class="set-left-b wrapper2 center_box">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="modal-headr">
+                <h5 class="text-center text-white">Edit Message</h5>
+                <hr class="bor-b"/>
+            </div>
+            <div class="modal-body">
+                <textarea type="text" name="message" cols="50" rows="10"  id="mess"> {{ mes.message }} </textarea>
+            </div>
+
+            <div class="modal-fooer">
+                <input type="hidden" name="getme" value="{{ mes.id }}">
+                <button type="submit" class="btn text-none btn-outline-primary btn-sm" name="act" value='Update'>updates</button>
+                <a class="btn text-none btn-outline-primary btn-sm" href="{% url 'kamra' id %} ">Back</a>
+            </div>
+        </form>
+    </div>
+
+
+{% endif %}
+
+
+
+{% endblock content %}

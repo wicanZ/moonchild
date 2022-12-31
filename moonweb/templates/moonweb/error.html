@@ -1,0 +1,29 @@
+{% extends '../main/main.html' %}
+
+
+{% block content %}
+    {% if user.is_authenticated %}
+
+    <div class="container wrapper">
+        <h1 class="text-center bg-primary">Error</h1>
+        <p class="text-dark">
+            Something is wrong with this Page
+        </p>
+    </div>
+    {% else %}
+    <div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+    </div>
+
+    {% endif %}
+{% endblock content %}

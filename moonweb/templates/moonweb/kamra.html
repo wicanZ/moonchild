@@ -1,0 +1,133 @@
+{% extends '../main/main.html' %}
+{% block content %}
+    {% if user.is_authenticated %}
+    <div class="card-box center_box ">
+        <!-- part
+        <div>
+            {% for p in par %}
+            <p class="participents">
+                @{{p.username}} 
+            </p>
+            <hr>
+            {% endfor %}
+        </div> -->
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="alert alert-info alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{msg.message}}
+            </div>
+            {% endfor %}
+        {% endif %}
+
+
+        <div class="container ">
+                <a class="pr-4 text-none" href="{% url 'home'  %}"> ⬅ </a>
+
+                
+                <a class="text-none" href="{% url 'detail' listth.id  %}"> {{ listth.title | capfirst }}</a>
+                <div  class="btn-group float-right">
+                    <form action="{% url 'like' listth.pk %}" method="POST" class="ml-2">
+                        {% csrf_token %}
+                        <button class="btn btn-primary btn-sm" name="like" value="{{ listth.id }}" type="submit">Like <small class="p-1">{{like}}</small> </button>
+    
+                    </form>
+                </div>
+            <hr class="bor-b">
+        </div>
+        
+        
+   
+        <fieldset id="notefont" class="b-message bg-message message-scroll">
+            
+            <div class="mb-4">
+
+                {% for mes in message %}  
+                <div class="btn-group" >
+                    <div class="row">
+                        <div class="ml-4" title="{{ mes.created | timesince }}">  
+                            <div class="message-chat">
+
+                                {% if request.user == mes.user %}
+
+                                <a class="text-none pl-2 text-white" href="{% url 'editmess' mes.id %}"> 
+                                    <span>&#9997;</span>
+                                </a>
+                                <a class="text-none pl-2 text-white" href="{% url 'delmess' mes.id %}"> 
+                                    <span> ⨳ </span>
+                                </a>
+
+                              
+                                {% endif %}
+
+                                    
+                                    <div class="pos-profile">
+                                        <a class="text-none" href="{% url 'prof' mes.user.id %}"> 
+                                            <img class="img-icon" src="{{ mes.user.image.url }}" alt="profile-image">  
+                                        </a>
+                                        <span class="m-4 message-box p-2" id="chatcolor">{{ mes.message }} </span>
+                                        
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+                <hr/>
+
+                {% empty %}
+                    <div class="container">
+                        <div class="text-center b-center">
+
+                            No Conversion
+
+                        </div> 
+                    </div>
+                {% endfor %}
+            </div>
+
+        </fieldset>
+
+
+        <footer  class="footer mt-auto py-2 place-foter" id="chatfooterbgcolor">
+            <div class="container">
+                <form class="contain" action="" method="POST">
+                    {% csrf_token %}
+                    <!-- {{ form.as_p }} -->
+                    <input class="res" type="text" name="message" placeholder="Typing...">
+                    <input class="" type="submit" name="act" value='▶'/>
+                </form>
+            </div>
+        </footer>
+
+    </div>
+
+                
+               
+                
+        
+
+    {% else %}
+
+    <div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> Check this-out </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+
+    </div>
+
+
+    {% endif %}
+
+{% endblock content %}
+
+

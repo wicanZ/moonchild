@@ -1,0 +1,41 @@
+{% extends '../main/main.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+
+<div class="text-white wrapper2 set-center mt-4">
+	<form method="POST" action="{% url 'deleteevent' event.id %}">
+
+		{% csrf_token %}
+		
+		<div class="m-4">
+			<p>Are you sure to delete : </p>
+			<p>
+				{{ event }}
+			</p>
+		</div>
+        <hr class="bor-b">
+		<div class="btn-group">
+			<a class="btn btn-sm btn-outline-primary" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+			<button class="btn btn-sm btn-outline-primary" type="submit">Delete</button>
+		</div>
+		
+	</form>
+</div>
+{% else %}
+<div class="center_position text-center">
+	<div class="note">
+		<div class="tem">
+		  <details><summary> </summary>
+			<ul class="items">
+			  <div class="butt">    
+				Need you to Login
+			  </div>                                      
+			</ul>
+		  
+		  </details>
+	</div> 
+</div>
+
+{% endif %}
+{% endblock content %}
+

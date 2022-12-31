@@ -1,0 +1,64 @@
+{% extends '../main/main.html' %} 
+{% block content %} 
+{% if user.is_authenticated %}
+	<div class="set-center "> <!-- FIXED _-->
+		<div class="wrapper2 ">
+			<form method="get" action="">
+				<div class="input-group mb-4">
+					<input type="search" class="form-control rounded mr-2" value="{{ query }}" placeholder="Search" aria-label="Search" aria-describedby="search-addon" name="q" />
+					<button type="submit" class="btn btn-outline-primary">search</button>	
+				</div>
+			</form>
+
+			<form method="post" action="">
+				{% csrf_token %} {% if messages %} {% for msg in messages %}
+					<div class="alert alert-info alert-dismissable">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	{{msg.message}} </div>{% endfor %} {% endif %}
+					<div class="btn-group ">
+						{% if but == True %}<button type="submit" class="btn btn-sm btn-outline-primary ml-2 " id="removeitems">delete</button>{% else %}{% endif %}
+					</div>
+					<hr>
+					
+				<div class="wrapper2">{% for data in listem %} {% if data.private  == 1 %} {% else %}
+					<div> {% if data.creator == request.user %}
+						<input type="checkbox" onchange="validate();" name="sel-delete" value="{{ data.id }}" id="datadelete" class="float-right mr-4">
+						<a class=" ml-2 styleitems card-link" id="" href="{% url 'kamra' data.id %}"> {{ data.title | capfirst }}</a>
+			{% else %}	<a class=" ml-2 card-link"  href="{% url 'kamra' data.id %}"> {{ data.title | capfirst }}</a> {% endif %}
+					</div>
+					<hr/>{% endif %}
+		{% empty %}	<div class="center_position text-center">
+						<div class="note tem items butt">
+							<a class="ml-5 text-none float-right" href="{% url 'home' %}">
+								X
+							</a>
+							<div class="butt">
+								<code>Searching, Not Found</code>                                     
+							</div> 
+						</div>    
+					</div>{% endfor %}
+			
+				</div>
+
+			</form> 
+		</div> 
+	</div> {% else %}
+	<div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> Check this-out </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+
+    </div>
+	</div>
+	{% endif %}
+ 
+{% endblock content %}
+

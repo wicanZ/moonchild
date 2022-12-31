@@ -1,0 +1,79 @@
+{% extends '../main/main.html' %}
+
+
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+
+    <div class="set-left-b center_box wrapper2">
+        {% if messages %}
+			{% for msg in messages %}
+			<div class="alert alert-info alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				{{msg.message}}
+			</div>
+			{% endfor %}
+		{% endif %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <fieldset class="fieldset-blog">
+                <legend class="text-white text-center">Create-Blog</legend>
+                <hr class="bor-b">
+                <!-- <div class="header-blog">
+                    <div class="btn-group">
+                        <button class="btn btn-primary btn-sm bor-r" type="button">bold</button>
+                        <button class="btn btn-primary btn-sm bor-r" type="button">list</button>
+                        <button class="btn btn-primary btn-sm bor-r" type="button">Header</button>
+                        <button class="btn btn-primary btn-sm bor-r" type="button">Image</button>
+                        <button class="btn btn-primary btn-sm bor-r" type="button">pre</button>
+                        <button class="btn btn-primary btn-sm bor-r" type="button">Emphasis</button>
+                        <button class="btn btn-primary btn-sm bor-r" type="button">copy</button>
+                        <button class="btn btn-primary btn-sm bor-r" type="button">clear</button>
+                        <button class="btn btn-primary btn-sm bor-r" type="button">Redo</button>
+                        <button class="btn btn-primary btn-sm"       type="button">Undo</button>
+                    </div>
+                    <hr>
+                </div>
+                <textarea name="blog" id="" cols="30" rows="10" class="textarea-blog" placeholder="Make your Own blog..."></textarea> -->
+                    {{ formblog.media }}
+
+                    <div class="">
+						<label for="" class="text-white"> Header-Title </label>
+						<p>
+							{{ formblog.header }}
+						</p>
+					</div>
+
+                    <div class="">
+						<label for="" class="text-white"> Create-Blog </label>
+						<p>
+							{{ formblog.blog }}
+						</p>
+					</div>
+                
+                <div class="m-4 ">
+                    <button class="btn btn-info" type="submit">Save</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    {% else %}
+
+    <div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+
+    </div>
+
+    {% endif %}
+{% endblock content %}

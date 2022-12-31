@@ -1,0 +1,40 @@
+{% extends '../main/main.html' %}
+
+
+{% block content %}
+
+
+	{% if user.is_authenticated %}
+		<h3>
+			{{ user.username }}
+			
+		</h3>
+		<p>Chat that you are join </p>
+		{% for data in listem %}
+		<h3>
+			{{ forloop.counter }}.<a href="{% url 'kamra' data.id %}"> {{ data.title }}</a> 
+		</h3>
+		<hr/>
+	{% endfor %}
+		<hr/>
+
+	{% else %}
+	<div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> Check this-out </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+
+    </div>
+	{% endif %}
+
+{% endblock content %}
+
+

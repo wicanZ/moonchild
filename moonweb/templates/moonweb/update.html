@@ -1,0 +1,63 @@
+{% extends '../main/main.html' %}
+
+{% block content %}
+
+
+	{% if user.is_authenticated %}
+
+	<div class="set-left-b wrapper2 center_box">
+			<h5 class="text-center">Update</h5>
+			<hr class="bor-b"/>
+			<form method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				<div class="">
+					<label for="" class="text-primary">{{ form.title.label }}</label>
+					<p>
+						{{ form.title }}
+					</p>
+				</div>
+
+				<div class="">
+					<label for="" class="text-primary"> {{ form.body.labe }} </label>
+					<p>
+
+						{{ form.body }}
+					</p>
+				</div>
+				<div class="inline-b">
+					{{ form.private }}
+					<label for="id_private" class="text-primary"> Set as Private </label>
+					
+				</div>
+				<hr class="bor-b">
+
+				<div class="ml-4 btn-group float-right">
+					<a class="btn text-none btn-outline-primary btn-sm" href="{{ request.META.HTTP_REFERER }}">Go Back</a>
+					<button class="btn text-none btn-outline-primary btn-sm" type='submit' name="act" value='Update'>Update</button>
+				</div>
+				</form>
+			</form>
+	</div>
+
+	{% else %}
+
+	<div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+
+    </div>
+	</div>
+
+	{% endif %}
+
+{% endblock content %}
+

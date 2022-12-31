@@ -1,0 +1,108 @@
+{% extends '../main/main.html' %}
+
+
+{% block content %}
+
+	{% if user.is_authenticated %}
+	<div class="profile-card text-white">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <div>
+                <h5 class="text-center mt-2">
+                    {% if user.username|length > 25 %}
+                    <marquee>  {{ user.username|slice:':50' }} </marquee>
+                    {% else %}
+                    {{ user.username }}
+                    {% endif %}
+                    
+                </h5>
+                <hr class="hrline">
+                <div class="float-right mr-2">
+                    {% if request.user != user.email %} {% else%}
+
+                    <a href="{% url 'deactivate' %}" class="text-none float-right" title="delete user " style="font-size: 25px;">♺</a>  
+                    {% endif %}
+
+                    <div>
+
+                        <label for="id_image">
+                            <img class="photo" src="{{ user.image.url }}" >
+                        </label>
+
+                        {{form.image}}
+                    
+                    </div>
+                </div>
+                
+                
+                
+            </div>
+
+            <div style="margin: 24px 0; text-align: center;">
+                
+
+                <div style="text-align: center;">
+                    <h1>{{ user.name  | title }} </h1>
+                    <p class="title ">{{ user.email }}</p>
+
+                    {% if request.user.email == user.email%}
+                        {% if user.phone_number != None %}
+                        <p>{{ user.phone_number | urlize }} </p>
+
+                        {% else %}
+                            <p> Set Phone Number </p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+
+
+            {% if request.user.email != user.email %}
+            <a class="uppro text-none text-white" href="{% url 'userprofile' %} ">change-Profile</a>
+
+            {% else %}
+            <div class="btn-group uppro">
+                <a class="btn btn-sm btn-outline-primary" href="{% url 'userprofile' %} ">change-Profile</a>
+                <button class="btn btn-sm btn-outline-primary">upload</button>
+                <a class="btn btn-sm btn-outline-primary" href="{% url 'deactivate' %} ">delete-account</a>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+
+   
+
+
+	{% else %}
+	<div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> Check this-out </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+
+    </div>
+	{% endif %}
+
+
+
+ 
+
+
+
+{% endblock content %}
+
+

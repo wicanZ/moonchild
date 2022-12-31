@@ -1,0 +1,55 @@
+{% extends '../main/main.html' %}
+
+
+{% block content %}
+	{% if user.is_authenticated %}
+        <div class="wrapper2 mt-4 set-center">
+            <h3>
+                {{set}}
+            </h3>
+            <hr class="bor-b">
+            {% for pri in mess %}
+
+
+                <!-- show private Chat here  -->
+                {% if pri.private  == 0 %}
+    
+                {% else %}
+                    <h3>
+                        <ul>
+                            
+                            <li>
+                                {% if request.user == pri.creator  %}
+                                    <a class="text-none" href="{% url 'viewpriv' pri.id %}"> {{ pri.title | capfirst }}</a> 
+                                {% endif %}
+                            </li>
+                        </ul>
+                        <hr>
+                        
+                    </h3>
+                {% endif %}
+            {% empty %}
+                You have no private chat
+            {% endfor %}
+        </div>
+
+
+    {% else %}
+    <div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+
+    </div>
+
+    {% endif %}
+
+{% endblock content %}

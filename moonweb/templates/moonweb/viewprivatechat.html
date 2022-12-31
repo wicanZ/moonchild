@@ -1,0 +1,105 @@
+{% extends '../main/main.html' %}
+
+
+{% block content %}
+
+	{% if user.is_authenticated %}
+    <div class="card-box center_box ">
+        <div class="wrapper2  mb-4">
+            <div class="menu">
+                <a href="#" class="back"><i class="fa fa-angle-lef"></i> <img src="" draggable="false"/></a>
+                <div class="name"> <a class="text-none ml-4" href="{% url 'detail' listth.title  %}"> {{ listth.title | capfirst }}</a> </div>
+            <div class="members text-center"><b>You Alone</b></div>
+        </div>
+
+        <ol class="chat message-scroll">
+    
+        {% for mes in mess %}
+            {% if request.user == mes.user %}
+            
+            <li class="other">
+                <div class="msg">
+                    <div class="user">{{mes.user}}<span class="range admin">Creator</span></div>
+                    <p>{{mes}} </p>
+                    <time>{{ mes.created | timesince  }}</time>
+                </div>
+            </li>
+
+            {% else %}
+            <li class="self">
+                <div class="msg">
+                    <div class="user">{{mes.user}}<span class="range admin">Creator</span></div>
+                    <p>{{ mes }}</p>
+                    <time>{{ mes.created | timesince }}</time>
+                </div>
+            </li>
+            {% endif %}
+
+
+        
+
+
+        {% empty %}
+        
+         No Conversion
+
+        {% endfor %}
+        </ol>
+     
+
+      
+        <!-- <li class="self">
+          <div class="msg">
+            <img src="https://static0.srcdn.com/wordpress/wp-content/uploads/2020/10/Among-Us-Imposter-1.jpg?q=50&fit=crop&w=960&h=500" draggable="false"/>
+            <time>12:19</time>
+          </div>
+        </li> 
+       
+        <div class="day">1:00</div>
+  
+   
+       
+    
+       
+        <p class="notification">Leave a like <time>1:11</time></p>
+ 
+        </ol>
+        <div class="typezone">
+
+        </div>
+    -->
+
+
+
+    <footer class="footer mt-auto py-3 place-foter">
+        <div class="container">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <!-- {{ form.as_p }} -->
+                <input type="text" name="message" placeholder="Typing...">
+                <input type="submit" name="act" value='Send'/>
+            </form>
+        </div>
+    </footer>
+    </div>
+
+
+    {% else %}
+    <div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+
+    </div>
+
+    {% endif %}
+
+{% endblock content %}

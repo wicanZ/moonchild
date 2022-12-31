@@ -1,0 +1,80 @@
+{% extends '../main/main.html' %}
+{% block content %}
+	{% if user.is_authenticated %}
+		<div class="center_room user_card text-white">
+			
+			<div class="btn-group float-right">{% if bio.private %}
+				<a class="btn text-none btn-outline-primary btn-sm " href="{% url 'viewpriv' bio.id %}">⬅ </a>{% else %}	
+				<a class="btn text-none btn-outline-primary btn-sm " href="{% url 'kamra' bio.id %}">⬅ </a>{% endif %}
+				{% if request.user == bio.creator %}
+				<a class="btn btn-info btn-sm float-right" href="{% url 'edit'   bio.id %}">Edit</a>
+				<a class="btn btn-info btn-sm float-right" href="{% url 'uploadnoteimg'   bio.id %}">upload</a> 
+				<a class="btn btn-info btn-sm float-right" href="{% url 'delete' bio.id %}">del</a>
+				<a class="btn btn-info btn-sm float-right" href="{% url 'notesetting' bio.id %}">setting</a>
+				{% endif %}
+			</div>
+			
+			{% if bio.image %}
+			<div class="image-container">
+				<img class="noteimg" src="{{ bio.image.url }}"/>
+				<div class="top-left">
+					<h5>
+						{{ uni }}.{{ bio | capfirst }}
+					</h5> 
+				</div>
+				<div class="bottom-left">
+					<small class="mb-4">
+						<span>  {{ bio.date  | date:"Y/M/d h:m:s a"  }} </span>
+					</small>
+				</div>
+				<div class="top-right"></div>
+				<div class="bottom-right">
+					<small> {{ bio.date  | timesince}} </small>
+				</div>
+			</div>
+			{% endif %}
+			<small>
+				
+				<a class="text-none" href="{% url 'prof' bio.creator.id %}"> 
+					<img class="img-icon mb-2 ml-2" src="{{ bio.creator.image.url }}" alt="profile-image"> 
+					<a class="text-white text-none ml-4" href="{% url 'prof' bio.creator.id %}"> Admin :  @{{ bio.creator }} </a>	
+				</a>
+				<hr class="bor-r"> 		
+				
+            </small>  
+			<p>
+				About : {{ bio.body }}
+			</p>
+			<div>
+				<div class="tem">
+					<details><summary> welcome </summary>
+						<table class="items">
+						{% for particpent in group %}
+						{% if bio.creator  == particpent %}
+						{% else %}
+						<tr>
+							<td class="py-2">
+								<a class="text-none" href="{% url 'prof' particpent.id %}"> 
+									<img class="img-icon" src="{{ particpent.image.url }}" alt="profile-image">  
+								</a>
+							</td>
+							<td>
+								<a class="text-white text-none" style="font-size: 13px;" href="{% url 'prof' particpent.id %}"> @{{ particpent }} </a>
+							</td>
+						</tr>
+						{% endif %}
+							{% empty %} {% endfor %}                                 
+						</table>
+				  </details>
+			</div> 
+		</div>
+	{% else %}
+		<div class="text-center bg-dark">
+			You cannot view this page as a non-user
+		</div>
+		
+	{% endif%}
+
+{% endblock content %}
+
+

@@ -1,0 +1,63 @@
+{% extends '../main/main.html' %}
+
+{% block content %}
+
+
+
+	{% if user.is_authenticated %}
+	<div id="note1"> <!-- FIXED _-->
+		<div class="wrapper2 center_box center-box">
+			<div class="wrapper">
+				<h5 class="text-center">Add Note</h5>
+				<hr class="bor-b">
+				<form method="POST" action="" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="">
+						<label for="" class="">{{ form.title.label }}</label>
+						<p>
+							{{ form.title }}
+						</p>
+					</div>
+
+					<div class="">
+						<label for="" class=""> {{ form.body.label }} </label>
+						<p>
+
+							{{ form.body }}
+						</p>
+					</div>
+
+					<div class="inline-b">
+						{{ form.private }}
+						<label for="id_private" class=""> Set as Private </label>
+						
+					</div>
+					<hr class="bor-b">
+					<div class="ml-4">
+						<button class="btn btn-sm btn-outline-primary" type='submit' name="act" value='Create'>Create</button>
+					</div>
+				</form>
+			</div>	
+		</div>
+	</div>
+	{% else %}
+	<div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> Check this-out </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+
+    </div>
+	{% endif %}
+
+
+
+{% endblock content %}
+

@@ -1,0 +1,25 @@
+{% extends '../main/main.html' %}
+{% block content %}
+
+    <div class="home" id="home">
+        
+        <div class="direction" id="direction">
+            {% if messages %}
+                {% for msg in messages %}
+                    <div class="alert alert-info alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{msg.message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {{ request.META.HTTP_REFERER }}
+            <div id="time" class="time"></div>
+            <div id="clock"></div>
+            <p class="text-white m-4">Make your mindset strong so that no one else disturbing you </p>
+            <div id="move" >move</div>
+        </div>
+    </div>
+
+    {% include '../main/footer.html' %}
+
+{% endblock %}

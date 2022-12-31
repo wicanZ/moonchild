@@ -1,0 +1,49 @@
+{% extends '../main/main.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="wrapper2 set-center center_position">
+        <div class="">
+            <h4 class="card-title text-center">About </h4>
+            <hr class="hrline">
+            <h6 class="card-subtitle mb-2">{{ about.founder }}</h6>
+            <p class="card-text"> {{ about.detail }} </p>
+
+            <hr class="hrline">
+
+            <div class="link d-flex ">
+                <a href="#" class="card-link text-warning">{{ about.more }}</a>
+                <a href="#" class="card-link text-warning">{{ about.top}}</a>
+            </div>
+
+        </div>
+    </div>
+{% else %}
+<div id="about" class="wrapper2 set-center center_position ">
+  <div><h2>About</h2></div>
+  <p>
+      Created in 2011, Hacker Typer arose from a simple desire to look like the
+      stereotypical hacker in movies and pop culture. Since that time, it has brought
+      smiles to millions of people across the globe. Plus, many of you have
+      temporarily transformed into hackers yourselves, all from a few clicks on the
+      keyboard (and some programming magic behind the scenes!).
+  </p>
+  <p>
+      Also, if you are using Hacker Typer in any of your projects, videos or images,
+      feel free to reach out! It s amazing to see what happens when people
+      creativity interacts with this site.
+  </p>
+  <p>You can reach the developer here: <i>hackertyper@duiker101.net</i></p>
+  <p>
+      And please note: No, I will kindly not hack into anyone personal property, so
+      please skip these requests. Thanks!
+  </p>
+  <p>
+      You can find more info at
+      <i><a target="_blank" href="https://duiker101.net">duiker101.net</a></i>
+  </p>
+  <div class="modal_footer">
+      <a href="{% url 'Home' %}" class="btn btn-sm btn-outline-primary">Close</a>
+  </div>
+</div>
+
+{% endif %} {% endblock content %}

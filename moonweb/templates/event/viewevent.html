@@ -1,0 +1,48 @@
+{% extends '../main/main.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+
+<div class="text-white wrapper2 set-center mt-4">
+	<form method="POST" action="{% url 'likeevent' event.id %}">
+		{% csrf_token %}
+        <div class="btn-group">
+			<a class="btn btn-sm btn-outline-primary" href="{% url 'homeevent' %}">Cancel</a>{% if request.user == event.user %}
+            <a class="btn btn-sm btn-outline-primary" href="{% url 'editevent' event.id %}">edit</a>
+            <a class="btn btn-sm btn-outline-primary" href="{% url 'deleteevent' event.id  %}">delete</a>{% endif %}
+			<button class="btn btn-sm btn-outline-primary" type="submit">like{% if like != 0 %} {{ like }} {% endif%}</button>
+		</div>
+        <hr class="hrline">
+		
+		<div class="m-4">
+            <ul>
+                <li>place  : {{ event.place }}</li>
+                <li>desc   : {{ event.desc}}</li>
+                <li> date  : {{ event.date}}</li>
+                <li>time   : {{ event.time}}</li>
+                <li>posted :{{ event.created}}</li>
+            </ul>
+
+			
+		</div>
+		
+		
+	</form>
+</div>
+{% else %}
+<div class="center_position text-center">
+	<div class="note">
+		<div class="tem">
+		  <details><summary> </summary>
+			<ul class="items">
+			  <div class="butt">    
+				Need you to Login
+			  </div>                                      
+			</ul>
+		  
+		  </details>
+	</div> 
+</div>
+
+{% endif %}
+{% endblock content %}
+

@@ -1,0 +1,66 @@
+{% extends '../main/main.html' %}
+
+
+{% block content %}
+	{% if user.is_authenticated %}
+	<div class= "center_box  user_card wrapper2 text-white">
+		<p class="text-center">
+			change-profile
+		</p>
+		
+
+		{% if messages %}
+			{% for msg in messages %}
+			<div class="alert alert-info alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				{{msg.message}}
+			</div>
+			{% endfor %}
+		{% endif %}
+
+		<div class="card-bx ">
+			<form action="" method="POST">
+				{% csrf_token %}
+				<label for="name">	{{ form.name }}</label>
+				<p>
+					<input type="text" name="username" id="" value="{{ request.user.username }}">
+				</p>
+				<div>
+					<label for="email">	{{ form.email }}</label>
+					<p>
+						<input type="email" name="email" id="" value="{{ request.user.email }}"> 
+					</p>
+				</div>
+				<hr class="hrline">
+				<button class="btn btn-outline-primary" type="submit">Save</button>
+			</form>
+		</div>        
+	</div>
+
+
+	{% else %}
+	<div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> Check this-out </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+
+    </div>
+	{% endif %}
+
+
+
+ 
+
+
+
+{% endblock content %}
+
+

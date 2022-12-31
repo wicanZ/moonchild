@@ -1,0 +1,102 @@
+{% extends '../main/main.html' %}
+
+
+{% block content %}
+
+
+<style>
+  .card-box
+{
+      padding: 5px;
+      width: 70%;
+      margin-bottom: 5%;
+  }
+
+  .blog-header {
+    padding: 1px;
+    margin-bottom: 5px;
+  }
+  .wrap-blog {
+    margin: 10px;
+    width: 100%;
+
+  }
+
+  img{
+    width: 98%;
+    padding-right: 8px;
+    max-height: 400px;
+  }
+
+ pre code {
+    color: white;
+  }
+  @media (max-width: 600px) {
+    .card-box
+    {
+        box-shadow: 0px 3px 40px rgb(238, 243, 238);
+        border: 3px solid rgb(97, 105, 97);
+        border-radius: 20px 30px 2px 10px;
+        padding: 5px;
+        width: 95%;
+        margin-bottom: 5%;
+    }
+    
+  }
+</style>
+    {% if user.is_authenticated %}
+      <div class="center_box card-box">
+        <div class="text-white ">
+
+          <form action="{% url 'like-blog' blog.pk %}" method="post">
+            {% csrf_token %}
+          <div class="btn-group">
+            {% if request.user  == blog.user %}
+            <a class="btn btn-outline-primary btn-sm float-right" href="{% url 'edit-blog'   blog.id %}">Edit-Blog</a> 
+            <span class="btn btn-outline-primary btn-sm">10 ⚉</span>
+            <button class="btn btn-outline-primary btn-sm" name="likeblog" value="{{ blog.id }}" type="submit">♡ <small class="p-2">{% if like != 0 %} {{like}} {% endif %}</small> </button>
+            <button type="button" class="btn btn-sm btn-outline-primary"> {{ blog.created}}</button>
+            {% else %}
+            <span class="btn btn-outline-primary btn-sm">10 views</span>
+            <button class="btn btn-outline-primary btn-sm" name="likeblog" value="{{ blog.id }}" type="submit">Like <small class="p-2">{{like}}</small> </button>
+            <span class="btn btn-sm btn-outline-primary"> {{ blog.created}}</span>
+
+            {% endif %}
+          </div>
+          </form>
+
+          <hr class="hrline">
+
+          
+
+          <div class="blog-header">
+            <h5 class="text-info ml-2">{{ blog.header | escape | capfirst }}</h5>
+          </div>
+
+          <hr class="bor-b">
+
+          <div class="wrap-blog text-white">
+            {{ blog.blog | safe  }}
+          </div>
+        </div>      
+      </div>
+
+    {% else %}
+
+    <div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> Check this-out </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+
+    </div>
+    {% endif %}
+
+{% endblock content %}

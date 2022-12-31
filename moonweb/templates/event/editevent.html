@@ -1,0 +1,70 @@
+{% extends '../main/main.html' %}
+{% block content %}
+	{% if user.is_authenticated %}
+	<div id="note1"> <!-- FIXED _-->
+		<div class="wrapper2 center_box center-box">
+            {% if messages %}
+            {% for msg in messages %}
+                <div class="alert alert-info alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    {{msg.message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+			<div class="">
+				<h5 class="text-center text-white">Add Event</h5>
+				<hr class="bor-b">
+				<form method="POST" action="" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="">
+						<label for="" class="text-primary">{{ form.place.label }}</label>
+						<p>
+							{{ form.place }}
+						</p>
+					</div>
+
+					<div class="">
+						<label for="" class="text-primary"> {{ form.desc.label }} </label>
+						<p>
+
+							{{ form.desc }}
+						</p>
+					</div>
+                    <div class="">
+						<label for="" class="text-primary"> {{ form.date.label }} </label>
+						<p>
+
+							{{ form.date }}
+						</p>
+					</div>
+                
+					<hr class="bor-b">
+					<div class="ml-4">
+						<button class="btn btn-sm btn-outline-primary" type='submit' name="act" value='Create'>Update</button>
+					</div>
+				</form>
+			</div>	
+		</div>
+	</div>
+	{% else %}
+	<div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> Check this-out </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+
+    </div>
+	{% endif %}
+
+
+
+{% endblock content %}
+

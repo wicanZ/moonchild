@@ -1,0 +1,40 @@
+{% extends '../main/main.html' %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+
+
+
+
+
+
+<div class="center_room wrapper2 mt-4 text-white">
+
+
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        <div class="modal-body">
+            <p>Are you Sure?</p>
+            {{ mes }}
+            <input type="hidden" name="delme" value="{{ mes.id }}">
+        </div>
+        <div class="btn-group">
+            <button type="submit" class="btn btn-sm btn-outline-primary" name="act" value='delete'>Delete</button>
+            <a class="btn btn-sm btn-outline-primary text-none" href="{% url 'kamra' id %} ">back</a>
+        </div>
+    </form>
+	
+	
+</div>
+
+
+{% endif %}
+
+
+
+{% endblock content %}

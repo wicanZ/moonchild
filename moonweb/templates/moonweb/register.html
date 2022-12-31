@@ -1,0 +1,65 @@
+{% extends '../main/main.html' %}
+
+{% block content %}
+
+<div class="user_card center_room wrapper2">
+
+	{% if messages %}
+		{% for msg in messages %}
+			<div class="alert alert-info alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			{{msg}}
+			
+			</div>
+		{% endfor %}
+	{% endif %}
+
+
+
+	<div class="w-full max-w-xs text-white ">
+		<h5 class="text-center">
+			REGISTER
+		</h5>
+		<hr class="hrline"/>
+		<form class="shadow-md rounded px-8 pt-6 pb-8 mb-4 " method="POST" action="">
+			{% csrf_token %}
+		<div class="mb-2">
+			<label class="ml-2" for="id_username" >
+				{{ register.username.label }}
+			</label>
+		
+			{{ register.username }} 
+		
+			
+		</div>
+		<div class="mb-2">
+			<label class="ml-2" for="id_email">
+				{{ register.email.label }} 
+			</label>
+			{{ register.email }} 
+		</div>
+		<div class="mb-2">
+			<label class="ml-2" for="id_password">
+				{{ register.password1.label }} 
+			</label>
+			{{ register.password1 }} 
+		</div>
+		<div class="mb-2">
+			<input type="checkbox" class="ml-2" name="viewpass" id="password1view" onclick="showpass()">
+			<label class=" text-sm font-bold ml-4 " for="password1view">
+				show password
+			</label>
+			
+		</div>
+		<hr class="hrline">
+
+		
+		<div class="items-center text-center ">
+			<button class="btn btn-sm btn-outline-primary" type='submit' value='Create'>create an account</button>
+		</div>
+		</form>
+	</div>
+  </div>
+
+{% endblock content %}
+

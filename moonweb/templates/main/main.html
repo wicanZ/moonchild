@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}"> 
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+  <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/segment7" type="text/css"/>
+  <title>Mindset</title>
+</head>
+  <body>
+      {% include '../main/nav.html' %}
+      {% block content %}
+      {% endblock %}
+      
+
+  <script src="{% static 'js/index.js' %}"></script>
+  <script src="{% static 'js/jquery.slim.min.js' %} "></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  </body>
+</html>

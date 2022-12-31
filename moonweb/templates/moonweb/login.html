@@ -1,0 +1,56 @@
+{% extends '../main/main.html' %}
+
+{% block content %}
+
+<div class="user_card center_room wrapper2">
+	{% if messages %}
+		{% for msg in messages %}
+			<div class="alert alert-info alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			{{msg.message}}
+			</div>
+		{% endfor %}
+	{% endif %}
+
+
+	<div class="w-full max-w-xs text-white">
+		<h5 class="text-center">
+			Login
+		</h5>
+		<hr class="hrline">
+		<form class="shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" action="">
+			{% csrf_token %}
+		<div class="mb-4">
+			<label class="text-gray-700 text-sm font-bold mb-2 block" for="username">
+				Email
+			</label>
+			<input name="username" class=" " id="username" type="text" placeholder="Username"/>
+		</div>
+		<div class="mb-4">
+			<label class="block text-gray-700 text-sm font-bold mb-2" for="id_password">
+			Password
+			</label>
+			<input name="password" class="" id="id_password" type="password" placeholder="Password"/>
+			
+		</div>
+		<div class="mb-2">
+			<input type="checkbox" id="showpassword" onclick="loginshowpass()" />
+			<label class="ml-4" for="showpassword">show password.</label>
+		</div>
+		<hr class="hrline">
+		<div class="items-center text-center btn-group ">
+			<button class=" btn btn-sm btn-outline-primary" type="submit">
+			Sign In
+			</button>
+			<a class="btn btn-sm btn-outline-primary" href="#">
+			Forgot Password?
+			</a>
+		</div>
+		</form>
+	</div>
+</div>
+  
+
+
+{% endblock content %}
+

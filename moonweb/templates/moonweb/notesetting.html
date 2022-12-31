@@ -1,0 +1,167 @@
+{% extends '../main/main.html' %}
+{% block content %}
+	{% if user.is_authenticated %}
+	<div class="wrapper2 set-center">
+		<div class="wrapper text-warning">
+			<div>
+				<h6>
+					change chat fontsize: add chat bg color,fontsize ,
+				</h6>
+				<hr class="hrline">
+				<div class="wrapper2 themecolors">
+					<input
+					  onchange="setchatFontSize(this.value)"
+					  id="range_chatfont_size"
+					  class="theme_font_text"
+					  type="range"
+					  min="15"
+					  max="30"
+					  value="15"
+					/>
+					<input id="chatspeed_input" class="theme_border_color inputline"  value="20" max='30' readonly/>
+				</div>
+
+
+				<div class="wrapper2  set-center">
+					<p id="test">
+						Test
+					</p>
+					<hr class="hrline">
+
+				<div class="wrapper2 themecolors">
+					<input
+					  onchange="Try(this.value)"
+					  id="tryme"
+					  class="theme_font_text"
+					  type="range"
+					  min="0"
+					  max="100"
+					  value="15"
+					/>
+					<input id="try_input" class="theme_border_color inputline"  value="0" readonly/>
+				</div>
+				</div>
+
+
+				<div class="wrapper2  set-center">
+					<p>
+						change bg color 
+					</p>
+					<hr class="hrline">
+
+				<ul class="themecolors">
+					<li 
+					onclick="chooseBgColor('red');"
+					class="themecolor"
+					style="background: red;"
+					>
+					</li>
+					<li 
+					onclick="chooseBgColor('blue');"
+					class="themecolor"
+					style="background: blue;">
+					</li>
+					<li 
+					class="themecolor"
+					onclick="chooseBgColor('green');"
+					style="background: green;">
+					</li>
+					
+					<li 
+					id="randomcolor"
+					class="themecolor"
+					onclick="randomBgColor();"
+					>
+					</li>
+					<li>
+						<input 
+						type="color" 
+						class="themecolor"
+						id="bgchatcolor" 
+						onchange="chooseBgColor(this.value)"
+						name="favcolor" 
+						value="#ff0000">
+					</li>
+				  </ul>
+				  
+				  
+				</div>
+
+
+
+				<div class="wrapper2  set-center">
+					<p>
+						change footer color 
+					</p>
+					<hr class="hrline">
+
+				<ul class="themecolors">
+					<li 
+					onclick="chooseFColor('red');"
+					class="themecolor"
+					style="background: red;"
+					>
+					</li>
+					<li 
+					onclick="chooseFColor('blue');"
+					class="themecolor"
+					style="background: blue;">
+					</li>
+					<li 
+					class="themecolor"
+					onclick="chooseFColor('green');"
+					style="background: green;">
+					</li>
+					<li 
+					class="themecolor"
+					onclick="chooseFColor('#ffcc00');"
+					style="background: #ffcc00;">
+					</li>
+					
+					<li 
+					id="randomcolor"
+					class="themecolor"
+					onclick="randomFColor();"
+					>
+					</li>
+
+					<li>
+						<input 
+						type="color" 
+						class="themecolor"
+						onchange="chooseFColor(this.value)"
+						id="favcolor" 
+						name="favcolor"
+						value="#ff0000">
+					</li>
+				  </ul>
+				  
+				</div>
+
+				
+				
+			</div>
+		</div>	
+	</div>
+
+	{% else %}
+
+	<div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+
+    </div>
+
+	{% endif %}
+
+{% endblock content %}
+

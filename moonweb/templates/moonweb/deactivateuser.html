@@ -1,0 +1,48 @@
+{% extends '../main/main.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="set-left-b wrapper2 center_room text-white">
+	{% if messages %}
+    {% for msg in messages %}
+    	<div class="alert alert-info alert-dismissable">
+        	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{msg.message}}
+        </div>
+    {% endfor %}
+    {% endif %}
+	<form method="POST" action="">
+
+		{% csrf_token %}
+		<div class="btn-group">
+			<a class="btn btn-sm btn-outline-primary" href="{% url 'vpro' %}">back</a>
+			<button class="btn btn-sm btn-outline-primary" type="submit">Submit</button>
+		</div>
+		<hr class="hrline">
+		<div class="m-4">
+			<p>
+				Type your name to delete your account permanently
+			</p>
+			<input type="text" name="username" id="username" placeholder="username">
+		</div>
+		
+	</form>
+</div>
+{% else %}
+<div class="center_position text-center">
+	<div class="note">
+		<div class="tem">
+		  <details><summary> </summary>
+			<ul class="items">
+			  <div class="butt">    
+				Need you to Login
+			  </div>                                      
+			</ul>
+		  
+		  </details>
+	</div> 
+</div>
+
+{% endif %}
+{% endblock content %}
+

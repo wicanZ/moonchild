@@ -1,0 +1,52 @@
+{% extends '../main/main.html' %}
+{% block content %}
+    {% if user.is_authenticated %}
+
+    <div class="set-left-b center_box wrapper2">
+        <form class="text-white" action="" method="post">
+            {% csrf_token %}
+            <fieldset class="fieldset-blog">
+                <legend class="text-center">update-Blog</legend>
+                <hr class="bor-b">
+            
+                    {{ formblog.media }}
+
+                    <div class="">
+						<label for="" class=""> Header-Title </label>
+						<p>
+							{{ formblog.header }}
+						</p>
+					</div>
+
+                    <div class="">
+						<label for="" class=""> Edit-Blog </label>
+						<p>
+							{{ formblog.blog }}
+						</p>
+					</div>
+                
+                <div class="m-4 ">
+                    <button class="btn btn-sm btn-outline-primary" type="submit">Save</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    {% else %}
+
+    <div class="center_position text-center">
+        <div class="note">
+            <div class="tem">
+              <details><summary> </summary>
+                <ul class="items">
+                  <div class="butt">    
+                    Need you to Login
+                  </div>                                      
+                </ul>
+              
+              </details>
+        </div> 
+
+    </div>
+
+    {% endif %}
+{% endblock content %}

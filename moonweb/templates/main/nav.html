@@ -1,0 +1,45 @@
+<div class="bg-dark mb-3 pt-2 pb-5">
+	{% if user.is_authenticated %}
+		<a class="text-none ml-4 p-4 " href="{% url 'home' %}">
+			X-star
+		</a>
+		<div class="dropdown place-drop float-right">
+			<div class="btn btn-default dropdown-toggle text-white "  data-toggle="dropdown">
+				<img src="{{ request.user.image.url }}" alt="Menu"  class="menuimg" > 
+			</div>
+			<ul class="dropdown-menu" >
+				<li class="dropdown-item">      
+					<a class="text-none" href="{% url 'vpro' %}"> 
+						<img class="img-icon" src="{{ request.user.image.url }}" alt="profile-image"> 
+						<span class="m-2 p-2">{{ request.user.username }}</span>
+					</a>
+				</li>
+				<li><a class="dropdown-item" href="{% url 'home' %} ">Message</a></li>
+				<li><a class="dropdown-item" href="{% url 'create' %} ">Add-Note</a></li>
+				<li><a class="dropdown-item" href="{% url 'create-blog' %} ">Add-Blog</a></li>
+				<li><a class="dropdown-item" href="{% url 'dash' %} ">Dashboard</a></li>
+				<li><a class="dropdown-item" href=" {% url 'about' %} ">About</a></li>
+				<li><a class="dropdown-item" href=" {% url 'setting' %} ">Setting</a></li>
+				<li><a class="dropdown-item" href="{% url 'logout' %} ">Logout</a></li>
+			</ul>
+		</div>
+	{% else %}
+		<a class="btn btn-default ml-5 text-white " href="{% url 'Home' %}">
+			home
+		</a>
+		<div class="dropdown  float-right">
+			<button class="btn btn-default dropdown-toggle text-white " type="button" data-toggle="dropdown">
+				Create an Account
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+				<li><a class="dropdown-item" href="{% url 'register' %} ">Register</a></li>
+				<li><a class="dropdown-item" href="{% url 'login' %} ">Login</a></li>
+				<li class="divider"></li>
+				<li class="dropdown-header">Profile</li>
+				<li><a class="dropdown-item" href="{% url 'about' %}">About</a></li>
+				<li><a class="dropdown-item" href="{% url 'about' %}">Setting</a></li>
+			</ul>
+		</div>
+	{% endif %}</div>
+

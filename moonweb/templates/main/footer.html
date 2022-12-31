@@ -1,0 +1,46 @@
+<!-- Footer -->
+<footer class="page-footer font-small special-color-dark pt-4">
+    <hr class="hrline">
+
+    <!-- Footer Elements -->
+    <div class="container">
+  
+      <!--Grid row-->
+      <div class="row">
+  
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+  
+        </div>
+        <!--Grid column-->
+  
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+  
+          <form method="post" action="{% url 'contactus' %}" class="input-group">
+            {% csrf_token %}
+            <input type="text" name='contactus' class="form-control form-control" placeholder="Enter Your email"
+              aria-label="Your email" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button class="btn btn-sm btn-outline-primary my-0" type="submit">Contact Us</button>
+            </div>
+          </form>
+  
+        </div>
+        <!--Grid column-->
+  
+      </div>
+      <!--Grid row-->
+  
+    </div>
+    <!-- Footer Elements -->
+  
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-2">© 2020 Copyright:
+      <a href="/">127.0.0.1</a>
+    </div>
+    <!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->
